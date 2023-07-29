@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bottleneck": "^2.19.5",
     "dotenv": "^16.3.1",
     "node-telegram-bot-api": "^0.61.0",
     "openai": "^3.3.0",
