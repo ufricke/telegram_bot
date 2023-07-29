@@ -2,6 +2,7 @@ import * as TelegramBot from 'node-telegram-bot-api';
 import * as openai from 'openai';
 import * as dotenv from 'dotenv';
 import Bottleneck from 'bottleneck';
+import { OpenAIResponse } from './types';
 
 dotenv.config();
 
@@ -28,15 +29,6 @@ const bot = new TelegramBot(token, { polling: true });
     });
     const openai = new OpenAIApi(configuration);
 
-    interface OpenAIResponse {
-      data: {
-        choices: {
-          text: string;
-        }[];
-      };
-    }
-    
-
     try {
 
       const limiter = new Bottleneck({
@@ -56,8 +48,6 @@ const bot = new TelegramBot(token, { polling: true });
           }
         )
       );
-        
-      // const response = completion.create;
         
       const generatedResponse = completion.data.choices[0].text;
         

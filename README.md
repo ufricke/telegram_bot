@@ -27,19 +27,16 @@ This repository contains a simple example of a Telegram bot written in TypeScrip
     Add your Telegram bot API token and chat ID to the `.env` file:
     ```
     API_TOKEN=YOUR_API_TOKEN
-    CHAT_ID=YOUR_CHAT_ID
+    OPEN_AI_API_KEY=YOUR_OPENAI_API_KEY
     ```
-    Replace YOUR_API_TOKEN and YOUR_CHAT_ID with your actual bot API token and chat ID.
-
+    Replace YOUR_API_TOKEN and YOUR_OPENAI_API_KEY with your actual tokens.
+    
 4. Run the Bot:
-
     ```bash
-    npm start
+    tsc
+    node dist/bot.js
     ```
-    The bot should now be running and will send a test message to the specified chat.
-
-## Changing the Message
-If you want to send a different message, modify the `messageText` variable in the `src/index.ts` file with your desired content.
+    The bot should now be running and will use chatgpt to answer questions.
 
 ## How to Get Your Chat ID and API Token
 To obtain your chat ID and API token, follow these steps:
