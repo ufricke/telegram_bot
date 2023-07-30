@@ -23,37 +23,41 @@ class TelegramBot {
       apiKey: openaiApiKey,
     });
 
-    const openai = new OpenAIApi(configuration);
-    return openai;
+    return new OpenAIApi(configuration);
   }
 
   public start(): void {
     this.bot.on('message', async (msg) => {
       const chatId = msg.chat.id;
       const userMessage = msg.text;
-
-      try {
-        const completion = await this.limiter.schedule(() =>
-          this.openai.createCompletion(
-            {
-              model: 'text-davinci-002',
-              prompt: userMessage
-            },
-            {
-              timeout: 1000,
-            }
-          )
-        );
-
-        const generatedResponse = completion.data.choices[0].text;
-        if(generatedResponse != undefined) {
-          this.bot.sendMessage(chatId, generatedResponse);
-        }
-      } catch (error) {
-        console.error('Error generating response:', error);
-        this.bot.sendMessage(chatId, 'Oops, something went wrong. Please try again later.');
-      }
+      await this.handleMessage(chatId, userMessage);
     });
+  }
+
+  protected async handleMessage(chatId: number, userMessage?: string): Promise<void> {
+    try {
+      const completion = await this.limiter.schedule(() =>
+        this.openai.createCompletion(
+          {
+            model: 'text-davinci-003',
+            prompt: userMessage,
+          },
+          {
+            timeout: 1000,
+          }
+        )
+      );
+
+      const generatedResponse = completion.data.choices[0].text;
+      if (generatedResponse != undefined) {
+        this.bot.sendMessage(chatId, generatedResponse);
+      } else {
+        this.bot.sendMessage(chatId, 'Unable to read response');
+      }
+    } catch (error) {
+      console.error('Error generating response:', error);
+      this.bot.sendMessage(chatId, 'Oops, something went wrong. Please try again later.');
+    }
   }
 }
 
