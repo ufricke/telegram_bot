@@ -11,7 +11,7 @@ class TelegramBot {
   constructor(token: string, openaiApiKey: string) {
     this.openai = this.openAI(openaiApiKey)
     this.bot = new TelegramBotAPI(token, { polling: true });
-    this.limiter = new Bottleneck({ maxConcurrent: 1, minTime: 1000 });
+    this.limiter = new Bottleneck({ maxConcurrent: 1, minTime: 5000 });
   }
 
   private openAI(openaiApiKey: string): OpenAIApi {
@@ -39,9 +39,10 @@ class TelegramBot {
           {
             model: 'text-davinci-003',
             prompt: userMessage,
+            max_tokens: 150
           },
           {
-            timeout: 1000,
+            timeout: 5000,
           }
         )
       );
@@ -54,7 +55,7 @@ class TelegramBot {
       }
     } catch (error) {
       console.error('Error generating response:', error);
-      this.bot.sendMessage(chatId, 'Oops, something went wrong. Please try again later.');
+      this.bot.sendMessage(chatId, (error as Error).message);
     }
   }
 }

@@ -1,6 +1,6 @@
-# Telegram Bot with TypeScript and node-telegram-bot-api
+# Telegram OpenAI Bot
 
-This repository contains a simple example of a Telegram bot written in TypeScript and powered by the `node-telegram-bot-api` library.
+This repository contains a simple example of a Telegram bot written in TypeScript. The bot uses the davinci openai model to formulate responses.
 
 ## Prerequisites
 
@@ -24,7 +24,7 @@ This repository contains a simple example of a Telegram bot written in TypeScrip
 3. Set up Environment Variables:
 
     Create a `.env` file in the project root directory.
-    Add your Telegram bot API token and chat ID to the `.env` file:
+    Add your API tokens to the `.env` file:
     ```
     API_TOKEN=YOUR_API_TOKEN
     OPEN_AI_API_KEY=YOUR_OPENAI_API_KEY
@@ -34,15 +34,13 @@ This repository contains a simple example of a Telegram bot written in TypeScrip
 4. Run the Bot:
     ```bash
     tsc
-    node dist/src/bot.js
+    node dist/src/app.js
     ```
     The bot should now be running and will use chatgpt to answer questions.
 
-## How to Get Your Chat ID and API Token
-To obtain your chat ID and API token, follow these steps:
+## How to Get Your API Tokens
+To obtain your API tokens, follow these steps:
 
 1. Create a Telegram bot by talking to the BotFather on Telegram.
 2. The BotFather will provide you with the bot API token.
-3. To get your chat ID, start a chat with your bot on Telegram.
-4. Use the third-party bot "IDBot" (@userinfobot) and send any message to it.
-5. IDBot will reply with information about your Telegram account, including your numeric chat ID.
+3. To get your OpenAI API token, login to your openai account to create it.
