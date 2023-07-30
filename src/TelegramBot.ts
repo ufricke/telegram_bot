@@ -1,9 +1,7 @@
 
 import * as TelegramBotAPI from 'node-telegram-bot-api';
 import Bottleneck from 'bottleneck';
-import { OpenAIResponse } from './types';
 import { OpenAIApi } from 'openai';
-
 
 class TelegramBot {
   private bot: TelegramBotAPI;

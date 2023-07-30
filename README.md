@@ -30,11 +30,11 @@ This repository contains a simple example of a Telegram bot written in TypeScrip
     OPEN_AI_API_KEY=YOUR_OPENAI_API_KEY
     ```
     Replace YOUR_API_TOKEN and YOUR_OPENAI_API_KEY with your actual tokens.
-    
+
 4. Run the Bot:
     ```bash
     tsc
-    node dist/bot.js
+    node dist/src/bot.js
     ```
     The bot should now be running and will use chatgpt to answer questions.
 
